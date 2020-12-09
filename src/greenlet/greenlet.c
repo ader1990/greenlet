@@ -146,6 +146,10 @@ static PyObject* ts_empty_dict;
 #define GREENLET_tp_traverse green_traverse
 #define GREENLET_tp_clear green_clear
 #define GREENLET_tp_is_gc green_is_gc
+static int
+slp_switch(void) {
+  return 0;
+}
 
 static void
 green_clear_exc(PyGreenlet* g)
@@ -343,15 +347,7 @@ static int (*g_initialstub)(void*);
 
 #define SLP_RESTORE_STATE() slp_restore_state()
 
-#define SLP_EVAL
-#define slp_switch GREENLET_NOINLINE(slp_switch)
-#include "slp_platformselect.h"
-#undef slp_switch
-
-#ifndef STACK_MAGIC
-#    error \
-        "greenlet needs to be ported to this platform, or taught how to detect your compiler properly."
-#endif /* !STACK_MAGIC */
+#define STACK_MAGIC
 
 #ifdef EXTERNAL_ASM
 /* CCP addition: Make these functions, to be called from assembler.

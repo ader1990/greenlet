@@ -48,7 +48,8 @@ else:
     if sys.platform == 'win32' and '64 bit' in sys.version:
         # this works when building with msvc, not with 64 bit gcc
         # switch_x64_masm.obj can be created with setup_switch_x64_masm.cmd
-        extra_objects = [GREENLET_PLATFORM_DIR + 'switch_x64_masm.obj']
+        #extra_objects = [GREENLET_PLATFORM_DIR + 'switch_x64_masm.obj']
+        extra_objects = []
     else:
         extra_objects = []
 
